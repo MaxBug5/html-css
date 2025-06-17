@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        background-color: lightblue;
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <p style="font-size: 30pt">Виявлення Червоного діаманта</p>
+    <p>Для входу на сайт введи, будь ласка пароль</p>
+    <p>Пароль:<input id="passwordBox" type="password" /></p>
+    <a href="diamant.html" onclick="return checkPassword();">
+      клацни тут щоб надіслати пароль і потрапити на сайт
+    </a>
+
+    <script>
+      function checkPassword() {
+        var password = document.getElementById("passwordBox");
+        var passwordText = password.value;
+        if (passwordText == "") {
+          return true;
+        }
+        alert("Доступ заборонено неправильний пароль");
+        return false;
+      }
+    </script>
+  </body>
+</html>

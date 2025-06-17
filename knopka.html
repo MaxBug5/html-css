@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <script>
+      function addItem() {
+        var newItem = document.createElement("div");
+        newItem.innerHTML = document.getElementById("box").value;
+        document.getElementById("list").appendChild(newItem);
+        document.getElementById("box").value = "";
+      }
+      function removeItem(item) {
+        document.getElementById("list").removeChild(item);
+      }
+    </script>
+  </head>
+  <body>
+    <p>Що слід зробити до спеціальної виставки</p>
+    <br />
+    <input type="text" id="box" value="Напиши тут завдання" />
+    <br />
+    <input type="button" value="додати пункт" onclick="addItem();" />
+    <br />
+    <div id="list">
+      <div onclick="removeItem(this);"></div>
+  </body>
+</html>
