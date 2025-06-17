@@ -3,28 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style></style>
+    <title></title>
+
     <script>
       function addItem() {
-        var newItem = document.createElement("div");
-        newItem.innerHTML = document.getElementById("box").value;
-        document.getElementById("list").appendChild(newItem);
-        document.getElementById("box").value = "";
+        var newItemText = document.getElementById("box").value;
+        if (newItemText) {
+          var newItem = document.createElement("div");
+          newItem.className = "item";
+          newItem.innerHTML = newItemText;
+          newItem.onclick = function () {
+            removeItem(newItem);
+          };
+          document.getElementById("list").appendChild(newItem);
+          document.getElementById("box").value = "";
+        }
       }
+
       function removeItem(item) {
         document.getElementById("list").removeChild(item);
+      }
+
+      function save() {
+        var items = [];
+        var listItems = document.querySelectorAll("#list .item");
+        listItems.forEach(function (item) {
+          items.push(item.innerHTML);
+        });
+        localStorage.setItem("box", JSON.stringify(items));
+      }
+
+      function load() {
+        var savedItems = JSON.parse(localStorage.getItem("box"));
+        var list = document.getElementById("list");
+        list.innerHTML = "";
+        if (savedItems) {
+          savedItems.forEach(function (itemText) {
+            var newItem = document.createElement("div");
+            newItem.className = "item";
+            newItem.innerHTML = itemText;
+            newItem.onclick = function () {
+              removeItem(newItem);
+            };
+            list.appendChild(newItem);
+          });
+        }
       }
     </script>
   </head>
   <body>
-    <p>Що слід зробити до спеціальної виставки</p>
-    <br />
-    <input type="text" id="box" value="Напиши тут завдання" />
-    <br />
+    <h2>Що слід зробити до спеціальної виставки</h2>
+    <input type="text" id="box" placeholder="Напиши тут завдання" />
     <input type="button" value="додати пункт" onclick="addItem();" />
-    <br />
-    <div id="list">
-      <div onclick="removeItem(this);"></div>
+    <input type="button" value="зберегти" onclick="save();" />
+    <input type="button" value="завантажити" onclick="load();" />
+    <div id="list"></div>
   </body>
 </html>
