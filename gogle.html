@@ -21,6 +21,10 @@
         margin: 10px;
         float: left;
       }
+
+      .thief {
+        background-color: red;
+      }
       .hidden {
         display: none;
       }
@@ -82,6 +86,7 @@
         board.children[randomNumber - 1].innerHTML = "крадій";
         board.children[randomNumber - 1].onclick = function () {
           gameScore++;
+          board.children[randomNumber - 1].className = classToSet + "thief";
         };
       }
     </script>
